@@ -1,0 +1,110 @@
+/* Conteneur principal du formulaire */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre les éléments horizontalement */
+  justify-content: center; /* Centre les éléments verticalement */
+  margin: 0 auto; /* Centre horizontalement */
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+/* Carte contenant le formulaire */
+.login-card {
+  padding: 2rem; /* Espace interne */
+  border-radius: 8px; /* Coins arrondis */
+  max-width: 600px; /* Limite la largeur maximale du formulaire */
+  width: 100%; /* Prend toute la largeur disponible jusqu'à la limite */
+  
+  box-sizing: border-box;
+}
+
+/* Titre */
+h2 {
+  margin-bottom: 1rem; /* Espace sous le titre */
+  font-size: 24px;
+  text-align: center; /* Centre le titre */
+}
+
+/* Styles pour les champs de formulaire */
+mat-form-field {
+  width: 50%; /* Réduit la largeur des champs à 50% */
+  margin-left: 25%; /* Centre les champs en les décalant vers la droite */
+  margin-bottom: 1rem; /* Espace entre les champs */
+}
+
+/* Styles pour le bouton de connexion */
+.login-button {
+  width: 30% !important; /* Réduit la largeur du bouton */
+  align-self: center; /* Centre le bouton horizontalement */
+  padding: 10px; /* Espace interne du bouton */
+  font-size: 14px; /* Taille de la police du bouton */
+  margin-top: 1.5rem; /* Espace avec les autres champs */
+  margin-left: 35% !important; /* Décale le bouton vers la droite */
+}
+
+button:hover {
+  background-color: #4500b5; /* Couleur plus foncée au survol */
+}
+
+/* Positionner la flèche à gauche, au-dessus du formulaire */
+.back-arrow-container {
+  display: flex;
+  justify-content: flex-start; /* Aligne la flèche à gauche */
+  margin-bottom: 20px; /* Espace entre la flèche et le formulaire */
+}
+
+.back-arrow {
+  font-size: 32px; /* Taille de l'icône */
+  color: #6200ea; /* Couleur de l'icône */
+  cursor: pointer; /* Changer le curseur pour montrer que c'est cliquable */
+}
+
+/* Message d'erreur */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 600px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 0 1rem; /* Mettez un peu de marge intérieure sur les côtés */
+  }
+
+  mat-form-field {
+    width: 85%; /* Champs prennent 85% de la largeur sur mobile */
+    margin-left: 7%; /* Décale les champs à droite */
+  }
+
+  input {
+    font-size: 15px; /* Taille de la police plus petite sur mobile */
+    padding: 6px; /* Augmente l'espace interne sur mobile */
+    height: 10px; /* Hauteur plus grande pour les inputs sur mobile */
+  }
+
+  .login-button{
+
+    width: 80% !important; /* Bouton plus petit sur mobile */
+    max-width: 50% !important; /* Le bouton prend toute la largeur disponible */
+    margin-left: 25% !important;
+    padding-bottom: 0px;
+    padding-top: 0%;
+    background-color: #6200ea;
+    
+  }
+   
+}
+
+/* Lorsque l'écran est supérieur à 600px  */
+@media (min-width: 601px) {
+  button {
+    width: 80%; /* Réduit la largeur du bouton sur les écrans plus larges */
+    margin-left: 25%; /* Décale encore plus le bouton vers la droite */
+  }
+}

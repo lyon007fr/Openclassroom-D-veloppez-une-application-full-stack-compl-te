@@ -1,0 +1,91 @@
+/* Conteneur principal */
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+
+  .theme-container{
+    
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding-top: 2%;
+      padding-left: 2%;
+      padding-right: 2%;
+    }
+/* Cartes de thème */
+.theme-card {
+  display: flex;
+  flex-direction: column; /* Arrange les éléments verticalement */
+  justify-content: space-between; /* Place le bouton en bas */
+  align-items: flex-start; /* Aligne le texte à gauche */
+  padding: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(238, 237, 237);
+  min-height: 100px; /* Fixe une hauteur minimale pour éviter la superposition */
+  height: auto; /* Permet à la carte de s'ajuster en fonction de son contenu */
+}
+
+
+/* Bouton centré */
+.btn-theme {
+  align-self: center; /* Centre le bouton horizontalement */
+}
+ 
+  h2{
+    text-align: center;
+  }
+  
+  /* Formulaire */
+  .profile-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  
+  .form-input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    
+  }
+  
+   /* Séparateur */
+  hr {
+    margin: 2rem 0;
+  }
+  
+  .deconect{
+    border: none;
+    box-shadow: none;
+    background: none;
+   
+  }
+   
+  /* Responsive */
+  @media (max-width: 600px) {
+    .theme-card {
+      margin: 1rem 0;
+    }
+    .theme-container{
+    margin-top: -10%;
+    gap: 0%; /*les cartes sont plus resseré entre elles sur mobile en vu colonne*/
+    
+    }
+        
+    h2{
+      display: none;
+    }
+
+    .form-group{
+      margin-left: 20%;
+    }
+
+  }
+  

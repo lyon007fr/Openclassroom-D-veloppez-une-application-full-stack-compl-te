@@ -1,0 +1,82 @@
+/* Conteneur principal */
+.sidenav-container {
+  height: 100vh;
+  background-color: white;
+}
+
+
+
+/* Navbar */
+.custom-toolbar {
+  background-color: #ffffff; /* Fond blanc */
+  color: #000000; /* Texte noir */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.menu-button {
+  display: none; /* Caché par défaut */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.nav-links a.active-link {
+  color: #7862c1; /* Violet pour le lien actif */
+}
+
+/* Sidebar (mobile) */
+.custom-sidenav {
+  width: 250px; /* Largeur personnalisée */
+  background-color: #ffffff;
+}
+
+.sidenav-links {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidenav-links a {
+  text-decoration: none;
+  color: #000000;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.sidenav-links a:hover,
+.sidenav-links a.active-link {
+  color:#7862c1 ; /* Violet pour le lien actif */
+}
+
+/* Responsive - Affichage sur mobile */
+@media (max-width: 768px) {
+  .menu-button {
+    display: block; /* Afficher le menu burger */
+  }
+
+  .profile-container {
+    margin-top: 70vh; /* pousse la photo de profil vers le bas */
+    text-align: center; /* centre la photo horizontalement */
+    padding: 10px 0;
+  }
+ 
+
+
+  .nav-links {
+    display: none; /* Cache les liens principaux */
+  }
+}

@@ -1,0 +1,91 @@
+.article-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex ;
+  flex-direction: column ; /* Arrange les éléments verticalement */
+  justify-content: flex-start; /* Place les éléments au début de la colonne */
+}
+
+.submit-btn {
+  align-self: center !important;
+  margin-left: 40% ;
+}
+
+.arrow-container h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 10%; /* centre le titre pour être au milieu du form */
+  text-align: center; /* Centre le texte */
+  width: 100%; /* Occupe toute la largeur */
+}
+
+
+.back-button {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  gap: 10px; /* Espace entre l'arrow et le titre */
+  width: 100%; /* Prend toute la largeur disponible */
+  justify-content: space-between; /* Sépare la flèche et le titre */
+}
+
+
+.back-button a {
+  text-decoration: none;
+  color: #7862c1;
+  font-size: 1.5rem;
+}
+
+.form-group textarea {
+  height: 200px;
+}
+
+mat-form-field {
+  width: 90%;
+}
+
+
+
+.submit-btn:hover {
+  background-color: #6200ea;
+}
+
+@media (max-width: 768px) {
+  .article-form {
+    padding: 15px;
+    box-shadow: none;
+  }
+
+  .article-form h1 {
+    font-size: 1.3rem;
+  }
+
+  .submit-btn {
+    width: 80px;
+    padding: 10px;
+    margin-left: 35%;
+  }
+
+  mat-form-field {
+    width: 95%;
+  }
+
+  .form-group textarea {
+    height: 150px !important;
+  }
+}
+
+
+@media (max-width: 330px) {
+  .article-form {
+    padding: 15px;
+    box-shadow: none;
+  }
+  .submit-btn {
+    width: 80px;
+    padding: 10px;
+    margin-left: 25%;
+  }
+}

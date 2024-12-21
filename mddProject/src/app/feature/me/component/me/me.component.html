@@ -1,0 +1,43 @@
+<div class="profile-container">
+  <h2 class="profile-title">Profil utilisateur</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="profile-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom d'utilisateur</mat-label>
+      <input matInput type="text" formControlName="username" required />
+      <mat-error *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched">
+        Le nom d'utilisateur est requis et doit comporter au moins 3 caractères.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required />
+      <mat-error *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+        L'email est requis et doit être valide.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" >
+      Sauvegarder
+    </button>
+    <button class="deconect" mat-stroked-button color="warn" (click)="logout()">Se déconnecter</button>
+
+  </form>
+
+  
+  <hr />
+
+  <h2 class="subscriptions-title">Abonnements</h2>
+
+  <div class="theme-container">
+  <mat-card *ngFor="let theme of subscribedThemes" class="theme-card">
+    <mat-card-title class="title">{{ theme.title }}</mat-card-title>
+    <mat-card-content>
+      <p>Description: {{ theme.description || 'Aucune description.' }}</p>
+    </mat-card-content>
+      <button class="btn-theme" mat-raised-button color="primary" (click)="unsubscribeFromTheme(theme.id)">
+        Se désabonner
+      </button>
+  </mat-card>
+</div>
+</div>

@@ -1,0 +1,50 @@
+<div class ="arrow-container">
+  <div class="back-button">
+    <a routerLink="/articles">
+      <i class="material-icons">arrow_back</i>
+    </a>
+    <h1>Créer un nouvel article</h1>
+  </div>
+
+</div>
+<div class="article-form">
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <!-- Sélectionner un thème -->
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Sélectionner un thème</mat-label>
+      <mat-select formControlName="themeId" required>
+        <mat-option *ngFor="let theme of themes" [value]="theme.id">
+          {{ theme.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Titre de l'article -->
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Titre de l'article</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="title"
+        placeholder="Titre de l'article"
+        required
+      />
+    </mat-form-field>
+
+    <!-- Contenu de l'article -->
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Contenu de l'article</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        placeholder="Contenu de l'article"
+        required
+      ></textarea>
+    </mat-form-field>
+
+    <!-- Bouton de soumission -->
+    <button class="submit-btn" mat-raised-button color="primary" type="submit" [disabled]="isLoading" class="submit-btn">
+      Créer
+    </button>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar uniquement visible sur mobile -->
+  <mat-sidenav #sidenav mode="over" position="end" class="custom-sidenav">
+    <nav class="sidenav-links">
+      <a *ngIf="isLoggedIn" mat-button routerLink="/articles" routerLinkActive="active-link" (click)="sidenav.close()">
+        Articles
+      </a>
+      <a *ngIf="isLoggedIn" mat-button routerLink="/themes" routerLinkActive="active-link" (click)="sidenav.close()">
+        Thèmes
+      </a>
+      <div class="profile-container">
+        <a mat-button routerLink="/me" class="profile-link">
+          <img src="assets/profile.png" alt="Profile" />
+        </a>
+      </div>
+    </nav>
+  </mat-sidenav>
+
+  <!-- Contenu principal -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="custom-toolbar">
+      <!-- Logo -->
+      <a routerLink="/home" class="logo">
+        <img src="assets/logo.png" alt="Logo" />
+      </a>
+
+      <!-- Menu Burger (visible uniquement sur mobile) -->
+      <button
+        mat-icon-button
+        class="menu-button"
+        aria-label="Ouvrir le menu"
+        *ngIf="isLoggedIn"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- Liens visibles sur Desktop (uniquement si connecté) -->
+      <div class="nav-links" *ngIf="isLoggedIn">
+        <a mat-button routerLink="/articles" routerLinkActive="active-link">Articles</a>
+        <a mat-button routerLink="/themes" routerLinkActive="active-link">Thèmes</a>
+        <a mat-button routerLink="/me" class="profile-link">
+          <img src="assets/profile.png" alt="Profile" />
+        </a>
+      </div>
+    </mat-toolbar>
+
+    <!-- Contenu de la page -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
