@@ -18,7 +18,6 @@ public class Article {
 
     @Column(nullable = false, length = 255)
     private String title;
-    
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -35,9 +34,8 @@ public class Article {
 
     @ManyToOne
     @JoinColumn(name = "theme_id", nullable = false)
-    private Theme theme; 
-    
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;  // Liste des commentaires associés à l'article
-}
+    private Theme theme;
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments; // Liste des commentaires associés à l'article
+}

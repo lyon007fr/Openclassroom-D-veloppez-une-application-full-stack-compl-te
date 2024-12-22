@@ -4,11 +4,10 @@ import { Theme } from '../../themes/interface/theme';
 import { UserService } from '../../me/service/userservice.service';
 import { User } from '../../me/interface/user';
 
-
 @Component({
   selector: 'app-theme',
   templateUrl: './theme.component.html',
-  styleUrls: ['./theme.component.css']
+  styleUrls: ['./theme.component.css'],
 })
 export class ThemeComponent implements OnInit {
   themes: Theme[] = []; // Liste des thèmes disponibles
@@ -17,28 +16,38 @@ export class ThemeComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
   ) {}
 
+  /**
+   * Méthode d'initialisation du composant.
+   * Charge l'utilisateur connecté et la liste des thèmes disponibles.
+   */
   ngOnInit(): void {
     this.loadUser();
     this.loadThemes();
   }
 
-  // Charge l'utilisateur connecté et initialise ses abonnements
+  /**
+   * Charge l'utilisateur connecté et initialise ses abonnements.
+   * Récupère les IDs des thèmes abonnés et les stocke dans `subscribedThemes`.
+   */
   private loadUser(): void {
     this.userService.getUser().subscribe(
       (user: User) => {
         this.user = user;
-        this.subscribedThemes = user.subscribedThemes.map(theme => theme.id); // Récupère les IDs des thèmes abonnés
+        this.subscribedThemes = user.subscribedThemes.map((theme) => theme.id); // Récupère les IDs des thèmes abonnés
       },
       (error) => {
         console.error('Error loading user:', error);
-      }
+      },
     );
   }
 
-  // Charge la liste des thèmes disponibles
+  /**
+   * Charge la liste des thèmes disponibles depuis l'API.
+   * Met à jour la liste `themes` avec les thèmes récupérés.
+   */
   private loadThemes(): void {
     this.themeService.getThemes().subscribe(
       (themes: Theme[]) => {
@@ -46,11 +55,16 @@ export class ThemeComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading themes:', error);
-      }
+      },
     );
   }
 
-  // Basculer entre abonnement et désabonnement
+  /**
+   * Bascule l'abonnement à un thème.
+   * Si l'utilisateur est déjà abonné, il se désabonne, sinon il s'abonne.
+   *
+   * @param themeId L'ID du thème auquel l'utilisateur souhaite s'abonner ou se désabonner.
+   */
   toggleSubscription(themeId: number): void {
     if (this.isSubscribed(themeId)) {
       this.unsubscribeFromTheme(themeId);
@@ -59,7 +73,12 @@ export class ThemeComponent implements OnInit {
     }
   }
 
-  // S'abonner à un thème
+  /**
+   * S'abonne à un thème.
+   * Ajoute l'ID du thème à la liste `subscribedThemes` de l'utilisateur.
+   *
+   * @param themeId L'ID du thème auquel l'utilisateur souhaite s'abonner.
+   */
   private subscribeToTheme(themeId: number): void {
     if (!this.user) {
       console.error('User is not loaded.');
@@ -73,11 +92,16 @@ export class ThemeComponent implements OnInit {
       },
       (error) => {
         console.error(`Error subscribing to theme ID ${themeId}:`, error);
-      }
+      },
     );
   }
 
-  // Se désabonner d'un thème
+  /**
+   * Se désabonne d'un thème.
+   * Supprime l'ID du thème de la liste `subscribedThemes` de l'utilisateur.
+   *
+   * @param themeId L'ID du thème auquel l'utilisateur souhaite se désabonner.
+   */
   private unsubscribeFromTheme(themeId: number): void {
     if (!this.user) {
       console.error('User is not loaded.');
@@ -86,16 +110,23 @@ export class ThemeComponent implements OnInit {
 
     this.userService.unsubscribeFromTheme(themeId).subscribe(
       (updatedUser: User) => {
-        this.subscribedThemes = this.subscribedThemes.filter(id => id !== themeId); // Supprime le thème des abonnements
+        this.subscribedThemes = this.subscribedThemes.filter(
+          (id) => id !== themeId,
+        ); // Supprime le thème des abonnements
         console.log(`Successfully unsubscribed from theme ID ${themeId}`);
       },
       (error) => {
         console.error(`Error unsubscribing from theme ID ${themeId}:`, error);
-      }
+      },
     );
   }
 
-  // Vérifie si l'utilisateur est abonné à un thème
+  /**
+   * Vérifie si l'utilisateur est abonné à un thème spécifique.
+   *
+   * @param themeId L'ID du thème à vérifier.
+   * @returns {boolean} `true` si l'utilisateur est abonné au thème, sinon `false`.
+   */
   isSubscribed(themeId: number): boolean {
     return this.subscribedThemes.includes(themeId);
   }

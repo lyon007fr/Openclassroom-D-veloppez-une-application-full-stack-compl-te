@@ -9,25 +9,25 @@
 
 .article-card {
   display: flex;
-  flex-direction: column; /* Arrange les éléments verticalement */
-  justify-content: space-between; /* Également l'espacement entre les éléments */
-  align-items: flex-start; /* Aligne le texte à gauche */
+  flex-direction: column;
+  /* Arrange les éléments verticalement */
+  justify-content: space-between;
+  /* Également l'espacement entre les éléments */
+  align-items: flex-start;
+  /* Aligne le texte à gauche */
   padding: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   background-color: rgb(238, 237, 237);
-  min-height: 100px; /* Fixe une hauteur minimale pour éviter la superposition */
-  height: auto; /* Permet à la carte de s'ajuster en fonction de son contenu */
+  min-height: 100px;
+  /* Fixe une hauteur minimale pour éviter la superposition */
+  height: auto;
+  /* Permet à la carte de s'ajuster en fonction de son contenu */
 }
 
 
 
 /* Bouton centré */
 .btn-theme {
-  align-self: center; /* Centre le bouton horizontalement */
+  align-self: center;
+  /* Centre le bouton horizontalement */
 }
-
-
-
-
-
-

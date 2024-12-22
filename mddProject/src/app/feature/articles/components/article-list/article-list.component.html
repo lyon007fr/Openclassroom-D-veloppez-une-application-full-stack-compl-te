@@ -1,5 +1,12 @@
 <div class="articles-header">
-  <button class="create-btn" mat-raised-button color="primary" routerLink="/article">Créer un article</button>
+  <button
+    class="create-btn"
+    mat-raised-button
+    color="primary"
+    routerLink="/article"
+  >
+    Créer un article
+  </button>
   <div class="sort-options">
     <label for="sort">Trier par</label>
     <mat-select [(value)]="selectedSort" (selectionChange)="sortArticles()">
@@ -13,12 +20,16 @@
     <mat-card-title>{{ article.title }}</mat-card-title>
     <mat-card-subtitle>
       <div class="subtitle-container">
-        <span>Date: {{ article.createdAt | date:'dd/MM/yyyy' }}</span>
+        <span>Date: {{ article.createdAt | date: "dd/MM/yyyy" }}</span>
         <span>Auteur: {{ article.authorName }}</span>
       </div>
-      
     </mat-card-subtitle>
-     <mat-card-content>Content: {{ article.content  | slice:0:200}}...</mat-card-content> <!-- slice permet de garder les caractère de l'index 0 à 200 -->
-    <button mat-button color="primary" routerLink="/article/{{ article.id }}">Voir détails</button>
+    <mat-card-content
+      >Content: {{ article.content | slice: 0 : 200 }}...</mat-card-content
+    >
+    <!-- slice permet de garder les caractère de l'index 0 à 200 -->
+    <button mat-button color="primary" routerLink="/article/{{ article.id }}">
+      Voir détails
+    </button>
   </mat-card>
 </div>

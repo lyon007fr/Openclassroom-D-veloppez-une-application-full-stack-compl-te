@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,13 +20,12 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;  // Relation avec l'utilisateur qui a écrit le commentaire
+    private User user; // Relation avec l'utilisateur qui a écrit le commentaire
 
     @ManyToOne
     @JoinColumn(name = "article_id", nullable = false)
-    private Article article;  // Relation avec l'article sur lequel le commentaire est posté
+    private Article article; // Relation avec l'article sur lequel le commentaire est posté
 
     private String authorName;
 
-    
 }

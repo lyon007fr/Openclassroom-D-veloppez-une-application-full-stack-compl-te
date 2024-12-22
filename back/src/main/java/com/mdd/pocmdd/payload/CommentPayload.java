@@ -10,5 +10,5 @@ public class CommentPayload {
     private String content;
     private Long userId;
     private Long articleId;
-    
+
 }

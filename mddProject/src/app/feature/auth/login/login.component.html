@@ -1,47 +1,38 @@
 <div class="back-arrow-container" (click)="goBack()">
   <mat-icon class="back-arrow">arrow_back</mat-icon>
 </div>
-<div class="login-container">  
+<div class="login-container">
   <h2>Se connecter</h2>
-    <div class="login-card">
-      
-      <form [formGroup]="loginForm"  (ngSubmit)="onLogin()">
-        <mat-form-field appearance="outline">
-          <mat-label>Email ou nom d'utilisateur</mat-label>
-          <input 
-            matInput 
-            type="text" 
-            formControlName="usernameOrEmail" 
-            required />
+  <div class="login-card">
 
-            <mat-error *ngIf="loginForm.get('usernameOrEmail')?.hasError('required')">
-              Le nom d'utilisateur est obligatoire.
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('usernameOrEmail')?.hasError('minlength')">
-              Le nom d'utilisateur doit comporter au moins 3 caractères.
-            </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline">
-          <mat-label>Mot de passe</mat-label>
-          <input 
-            matInput 
-            type="password" 
-            formControlName="password"  
-            required />
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email ou nom d'utilisateur</mat-label>
+        <input matInput type="text" formControlName="usernameOrEmail" required />
 
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-              Le mot de passe est obligatoire.
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-              Le mot de passe doit comporter au moins 8 caractères.
-            </mat-error>
-            
-        </mat-form-field>
-  
-        <button class="login-button" mat-raised-button color="primary" type="submit">Se connecter</button>
-      </form>
-      
-    </div>
+        <mat-error *ngIf="loginForm.get('usernameOrEmail')?.hasError('required')">
+          Le nom d'utilisateur est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('usernameOrEmail')?.hasError('minlength')">
+          Le nom d'utilisateur doit comporter au moins 3 caractères.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password" required />
+
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Le mot de passe est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+          Le mot de passe doit comporter au moins 8 caractères.
+        </mat-error>
+
+      </mat-form-field>
+
+      <button class="login-button" mat-raised-button color="primary" type="submit">Se connecter</button>
+    </form>
+
   </div>
-  
+</div>

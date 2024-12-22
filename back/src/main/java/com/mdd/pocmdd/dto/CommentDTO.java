@@ -14,7 +14,5 @@ public class CommentDTO {
     private Long userId;
     private String authorName;
     private Long articleId;
-    
-
 
 }

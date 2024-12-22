@@ -25,13 +25,8 @@
       </a>
 
       <!-- Menu Burger (visible uniquement sur mobile) -->
-      <button
-        mat-icon-button
-        class="menu-button"
-        aria-label="Ouvrir le menu"
-        *ngIf="isLoggedIn"
-        (click)="sidenav.toggle()"
-      >
+      <button mat-icon-button class="menu-button" aria-label="Ouvrir le menu" *ngIf="isLoggedIn"
+        (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
 

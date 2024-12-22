@@ -1,84 +1,122 @@
 .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centre les éléments horizontalement */
-    gap: 0.5rem; /* Réduit l'espace entre les champs */
-    padding: 0 1rem; /* Un peu de marge intérieure sur les côtés */
-    max-width: 600px; /* Limite la largeur du formulaire */
-    width: 100%; /* Prend toute la largeur disponible jusqu'à la limite */
-    margin: 0 auto; /* Centre le formulaire horizontalement */
-    box-sizing: border-box; /* Inclut les paddings dans les dimensions totales */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centre les éléments horizontalement */
+  gap: 0.5rem;
+  /* Réduit l'espace entre les champs */
+  padding: 0 1rem;
+  /* Un peu de marge intérieure sur les côtés */
+  max-width: 600px;
+  /* Limite la largeur du formulaire */
+  width: 100%;
+  /* Prend toute la largeur disponible jusqu'à la limite */
+  margin: 0 auto;
+  /* Centre le formulaire horizontalement */
+  box-sizing: border-box;
+  /* Inclut les paddings dans les dimensions totales */
+}
+
+
+
+mat-form-field {
+  width: 50%;
+  /* Réduit encore la largeur des champs de saisie */
+  margin-left: 25%;
+  /* Déplace les champs encore plus à droite */
+  margin-bottom: 4px;
+  /* Réduit l'espace entre les champs */
+}
+
+.register-button {
+  width: 30% !important;
+  /* Force l'application de cette règle */
+  /* Réduit la largeur du bouton à 30% de la largeur disponible */
+  align-self: center;
+  /* Centre le bouton horizontalement */
+  padding: 2px;
+  /* Réduit l'espace interne du bouton */
+  font-size: 14px;
+  /* Réduit légèrement la taille de la police */
+  margin-top: 1.5rem;
+  /* Espace avec les autres champs */
+  margin-left: 35% !important;
+  /* Décale le bouton vers la droite */
+}
+
+input {
+  padding: 2px;
+  /* Réduit encore l'espace interne pour rendre les inputs plus compacts */
+  font-size: 15px;
+  /* taille de l'écriture dans l'input */
+  height: 20px;
+  /* Réduit la hauteur des inputs à 20px */
+  width: 100%;
+  /* Les inputs prennent toute la largeur disponible dans mat-form-field */
+  box-sizing: border-box;
+  /* Inclut padding et bordure dans la largeur totale */
+}
+
+/* Lorsque l'écran est inférieur à 600px (mobile) */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 0 1rem;
+    /* Ajoute de la marge intérieure sur les côtés */
   }
 
-  
-  
   mat-form-field {
-    width: 50%; /* Réduit encore la largeur des champs de saisie */
-    margin-left: 25%; /* Déplace les champs encore plus à droite */
-    margin-bottom: 4px; /* Réduit l'espace entre les champs */
-  }
-  
-  .register-button {
-    width: 30% !important; /* Force l'application de cette règle *//* Réduit la largeur du bouton à 30% de la largeur disponible */
-    align-self: center ; /* Centre le bouton horizontalement */
-    padding: 2px; /* Réduit l'espace interne du bouton */
-    font-size: 14px; /* Réduit légèrement la taille de la police */
-    margin-top: 1.5rem; /* Espace avec les autres champs */
-    margin-left: 35% !important; /* Décale le bouton vers la droite */
+    width: 85%;
+    /* Champs prennent 85% de la largeur sur mobile */
+    margin-left: 7%;
+    /* Déplace les champs un peu plus à droite sur mobile */
   }
 
   input {
-    padding: 2px; /* Réduit encore l'espace interne pour rendre les inputs plus compacts */
-    font-size: 15px; /* taille de l'écriture dans l'input */
-    height: 20px; /* Réduit la hauteur des inputs à 20px */
-    width: 100%; /* Les inputs prennent toute la largeur disponible dans mat-form-field */
-    box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
+    font-size: 15px;
+    /* Taille de la police légèrement plus grande pour mobile */
+    padding: 6px;
+    /* Augmente légèrement l'espace interne sur les petits écrans */
+    height: 24px;
+    /* Hauteur plus grande pour mobile */
   }
-  
-  /* Lorsque l'écran est inférieur à 600px (mobile) */
-  @media (max-width: 600px) {
-    .form-container {
-      padding: 0 1rem; /* Ajoute de la marge intérieure sur les côtés */
-    }
-  
-    mat-form-field {
-      width: 85%; /* Champs prennent 85% de la largeur sur mobile */
-      margin-left: 7%; /* Déplace les champs un peu plus à droite sur mobile */
-    }
-  
-    input {
-      font-size: 15px; /* Taille de la police légèrement plus grande pour mobile */
-      padding: 6px; /* Augmente légèrement l'espace interne sur les petits écrans */
-      height: 24px; /* Hauteur plus grande pour mobile */
-    }
-  
-    .register-button {
-      width: 80%; /* Bouton plus petit sur mobile */
-      max-width: 100%; /* Le bouton prend toute la largeur disponible */
-      margin-left: 10%; /* Déplace le bouton vers la droite sur mobile */
-      padding-bottom: 0px;
-      padding-top: 0%;
 
-    }
+  .register-button {
+    width: 80%;
+    /* Bouton plus petit sur mobile */
+    max-width: 100%;
+    /* Le bouton prend toute la largeur disponible */
+    margin-left: 10%;
+    /* Déplace le bouton vers la droite sur mobile */
+    padding-bottom: 0px;
+    padding-top: 0%;
+
   }
-  
-  /* Lorsque l'écran est supérieur à 600px (tablette et plus grand) */
-  @media (min-width: 601px) {
-    .register-button {
-      width: 50%; /* Réduit la largeur du bouton sur les écrans plus larges */
-      margin-left: 25%; /* Décale le bouton encore plus à droite sur les grands écrans */
-    }
+}
+
+/* Lorsque l'écran est supérieur à 600px (tablette et plus grand) */
+@media (min-width: 601px) {
+  .register-button {
+    width: 50%;
+    /* Réduit la largeur du bouton sur les écrans plus larges */
+    margin-left: 25%;
+    /* Décale le bouton encore plus à droite sur les grands écrans */
   }
-  
+}
+
 /* Positionner la flèche à gauche, au-dessus du formulaire */
 .back-arrow-container {
-    display: flex;
-    justify-content: flex-start; /* Aligne la flèche à gauche */
-    margin-bottom: 20px; /* Espace entre la flèche et le formulaire */
-  }
-  
-  .back-arrow {
-    font-size: 32px; /* Taille de l'icône */
-    color: #6200ea; /* Couleur de l'icône */
-    cursor: pointer; /* Changer le curseur pour montrer que c'est cliquable */
-  }
+  display: flex;
+  justify-content: flex-start;
+  /* Aligne la flèche à gauche */
+  margin-bottom: 20px;
+  /* Espace entre la flèche et le formulaire */
+}
+
+.back-arrow {
+  font-size: 32px;
+  /* Taille de l'icône */
+  color: #6200ea;
+  /* Couleur de l'icône */
+  cursor: pointer;
+  /* Changer le curseur pour montrer que c'est cliquable */
+}

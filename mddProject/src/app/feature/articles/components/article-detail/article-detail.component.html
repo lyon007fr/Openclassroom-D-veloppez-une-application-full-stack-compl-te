@@ -1,39 +1,38 @@
 <div class="article-detail-container">
-    <div class="article-header">
-      <button mat-icon-button routerLink="/articles">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <h1>Titre de l'article sélectionné</h1>
-    </div>
-  
-    <div class="article-meta">
-      <span>Date : {{ article?.createdAt | date:'dd/MM/yyyy' }}</span>
-      <span>Auteur : {{ article?.authorName }}</span>
-      <span>Thème : {{ article?.themeTitle }}</span>
-    </div>
-  
-    <div class="article-content">
-      <p>{{ article?.content }}</p>
-    </div>
-  
-    <hr />
-  
-    <div class="comments-section">
-      <h2>Commentaires</h2>
-      <div *ngFor="let comment of article?.comments" class="comment-card">
-        <p><strong>{{ comment.authorName }}</strong></p>
-        <p>{{ comment.content }}</p>
-      </div>
-    </div>
-  
-    <div class="comment-form">
-      <mat-form-field class="full-width">
-        <mat-label>Écrivez ici votre commentaire</mat-label>
-        <textarea matInput [(ngModel)]="newCommentContent" rows="4"></textarea>
-      </mat-form-field>
-      <button mat-icon-button color="primary" (click)="submitComment()">
-        <mat-icon>send</mat-icon>
-      </button>
+  <div class="article-header">
+    <button mat-icon-button routerLink="/articles">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Titre de l'article sélectionné</h1>
+  </div>
+
+  <div class="article-meta">
+    <span>Date : {{ article?.createdAt | date:'dd/MM/yyyy' }}</span>
+    <span>Auteur : {{ article?.authorName }}</span>
+    <span>Thème : {{ article?.themeTitle }}</span>
+  </div>
+
+  <div class="article-content">
+    <p>{{ article?.content }}</p>
+  </div>
+
+  <hr />
+
+  <div class="comments-section">
+    <h2>Commentaires</h2>
+    <div *ngFor="let comment of article?.comments" class="comment-card">
+      <p><strong>{{ comment.authorName }}</strong></p>
+      <p>{{ comment.content }}</p>
     </div>
   </div>
-  
+
+  <div class="comment-form">
+    <mat-form-field class="full-width">
+      <mat-label>Écrivez ici votre commentaire</mat-label>
+      <textarea matInput [(ngModel)]="newCommentContent" rows="4"></textarea>
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="submitComment()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

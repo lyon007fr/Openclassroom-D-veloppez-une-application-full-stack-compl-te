@@ -3,14 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import {User} from '../interface/user';
-
+import { User } from '../interface/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = `http://localhost:8080/api`; 
+  private apiUrl = `http://localhost:8080/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -20,9 +19,9 @@ export class UserService {
    * @returns L'utilisateur courant
    */
   public getUser(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/me`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<User>(`${this.apiUrl}/me`)
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -30,10 +29,13 @@ export class UserService {
    * @param user L'utilisateur avec les champs username et email
    * @returns Observable<User>
    */
-  public updateUser(user: { username: string; email: string }): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/update`, user).pipe(
-      catchError(this.handleError)
-    );
+  public updateUser(user: {
+    username: string;
+    email: string;
+  }): Observable<User> {
+    return this.http
+      .put<User>(`${this.apiUrl}/update`, user)
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -42,9 +44,9 @@ export class UserService {
    * @returns L'utilisateur mis à jour avec ses nouveaux abonnements
    */
   public subscribeToTheme(themeId: number): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/subscribe/${themeId}`, {}).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .post<User>(`${this.apiUrl}/subscribe/${themeId}`, {})
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -53,12 +55,11 @@ export class UserService {
    * @returns L'utilisateur mis à jour avec ses abonnements
    */
   public unsubscribeFromTheme(themeId: number): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/unsubscribe/${themeId}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .delete<User>(`${this.apiUrl}/unsubscribe/${themeId}`)
+      .pipe(catchError(this.handleError));
   }
 
-  
   /**
    * Gère les erreurs qui peuvent survenir lors des requêtes HTTP.
    * @param error L'erreur capturée lors de l'appel API
@@ -66,6 +67,6 @@ export class UserService {
    */
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error);
-    throw error; 
+    throw error;
   }
 }

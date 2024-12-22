@@ -17,27 +17,27 @@
       </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" >
+    <button mat-raised-button color="primary" type="submit">
       Sauvegarder
     </button>
     <button class="deconect" mat-stroked-button color="warn" (click)="logout()">Se déconnecter</button>
 
   </form>
 
-  
+
   <hr />
 
   <h2 class="subscriptions-title">Abonnements</h2>
 
   <div class="theme-container">
-  <mat-card *ngFor="let theme of subscribedThemes" class="theme-card">
-    <mat-card-title class="title">{{ theme.title }}</mat-card-title>
-    <mat-card-content>
-      <p>Description: {{ theme.description || 'Aucune description.' }}</p>
-    </mat-card-content>
+    <mat-card *ngFor="let theme of subscribedThemes" class="theme-card">
+      <mat-card-title class="title">{{ theme.title }}</mat-card-title>
+      <mat-card-content>
+        <p>Description: {{ theme.description || 'Aucune description.' }}</p>
+      </mat-card-content>
       <button class="btn-theme" mat-raised-button color="primary" (click)="unsubscribeFromTheme(theme.id)">
         Se désabonner
       </button>
-  </mat-card>
-</div>
+    </mat-card>
+  </div>
 </div>

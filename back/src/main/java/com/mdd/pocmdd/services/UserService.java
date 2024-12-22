@@ -1,184 +1,238 @@
 package com.mdd.pocmdd.services;
 
 import com.mdd.pocmdd.repository.UserRespository;
-
 import lombok.extern.log4j.Log4j2;
-
 import com.mdd.pocmdd.dto.RegisterDTO;
 import com.mdd.pocmdd.dto.ThemeDTO;
 import com.mdd.pocmdd.dto.UserDTO;
 import com.mdd.pocmdd.mapper.UserMapper;
 import com.mdd.pocmdd.models.User;
 import com.mdd.pocmdd.payload.MeDto;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 import com.mdd.pocmdd.repository.ThemeRepository;
 import com.mdd.pocmdd.models.Theme;
 
-
-
+/**
+ * Service pour la gestion des utilisateurs.
+ */
 @Log4j2
 @Service
 public class UserService {
-    
+
+    /**
+     * Dépôt pour accéder aux données des utilisateurs.
+     */
     private UserRespository userRepository;
 
+    /**
+     * Dépôt pour accéder aux données des thèmes.
+     */
     private ThemeRepository themeRepository;
 
+    /**
+     * Mapper pour convertir les entités utilisateur en DTO et vice versa.
+     */
     private UserMapper userMapper;
+
+    /**
+     * Encodeur pour sécuriser les mots de passe.
+     */
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    //constructor
-    public UserService(UserRespository userRepository, ThemeRepository themeRepository, UserMapper userMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    /**
+     * Constructeur pour injecter les dépendances du service.
+     *
+     * @param userRepository        Le dépôt des utilisateurs.
+     * @param themeRepository       Le dépôt des thèmes.
+     * @param userMapper            Le mapper des utilisateurs.
+     * @param bCryptPasswordEncoder L'encodeur de mots de passe.
+     */
+    public UserService(UserRespository userRepository, ThemeRepository themeRepository, UserMapper userMapper,
+            BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.themeRepository = themeRepository;
         this.userMapper = userMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    //@Autowired
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    /**
+     * Recherche un utilisateur par son nom d'utilisateur.
+     *
+     * @param username Le nom d'utilisateur à rechercher.
+     * @return L'utilisateur correspondant ou null s'il n'existe pas.
+     */
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Recherche un utilisateur par son adresse email.
+     *
+     * @param email L'email à rechercher.
+     * @return L'utilisateur correspondant ou null s'il n'existe pas.
+     */
     public User findByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
+        return userRepository.findByEmail(email);
+    }
 
+    /**
+     * Enregistre un nouvel utilisateur.
+     *
+     * @param registerDTO Les données d'inscription de l'utilisateur.
+     * @throws IllegalArgumentException Si le nom d'utilisateur ou l'email est déjà
+     *                                  utilisé ou si des champs obligatoires sont
+     *                                  vides.
+     */
     public void registerUser(RegisterDTO registerDTO) {
-        //check si l'utilisateur existe déjà
-        if(userRepository.findByUsername(registerDTO.getUsername()) != null){
-            throw new IllegalArgumentException("Username already in use");
+        if (userRepository.findByUsername(registerDTO.getUsername()) != null) {
+            throw new IllegalArgumentException("Nom d'utilisateur déjà utilisé");
         }
         if (userRepository.findByEmail(registerDTO.getEmail()) != null) {
-            throw new IllegalArgumentException("Email already in use");
+            throw new IllegalArgumentException("Email déjà utilisé");
         }
-        // Vérification des champs
         if (registerDTO.getUsername() == null || registerDTO.getUsername().isEmpty()) {
-            throw new IllegalArgumentException("Username must not be empty");
+            throw new IllegalArgumentException("Le nom d'utilisateur ne doit pas être vide");
         }
         if (registerDTO.getPassword() == null || registerDTO.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("Password must not be empty");
+            throw new IllegalArgumentException("Le mot de passe ne doit pas être vide");
         }
-
 
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setRole("User");
-
-        //penser à encoder le mot de passe
         user.setPassword(bCryptPasswordEncoder.encode(registerDTO.getPassword()));
 
         userRepository.save(user);
     }
 
+    /**
+     * Récupère la liste de tous les utilisateurs.
+     *
+     * @return Une liste d'utilisateurs.
+     */
     public List<User> findAll() {
         return userRepository.findAll();
     }
-    
-    public UserDTO findById(Long id){
-        //cherche l'utilisateur par son id
+
+    /**
+     * Recherche un utilisateur par son identifiant et retourne ses données sous
+     * forme de DTO.
+     *
+     * @param id L'identifiant de l'utilisateur.
+     * @return Le DTO de l'utilisateur ou null s'il n'existe pas.
+     */
+    public UserDTO findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        //Vérifie si l'utilisateur existe
         UserDTO userDTO = null;
-        if(user.isPresent()){
-            //récupère l'utilisateur
+        if (user.isPresent()) {
             userDTO = new UserDTO();
             userDTO.setId(user.get().getId());
             userDTO.setUsername(user.get().getUsername());
             userDTO.setEmail(user.get().getEmail());
-            //convertir la liste des abonnements en ThemeDTO
             List<ThemeDTO> themes = user.get().getSubscribedThemes().stream()
-                .map(theme -> new ThemeDTO(theme.getId(), theme.getTitle(), theme.getDescription()))
-                .toList();
+                    .map(theme -> new ThemeDTO(theme.getId(), theme.getTitle(), theme.getDescription()))
+                    .toList();
             userDTO.setSubscribedThemes(themes);
-            log.info("User found: {}", userDTO);
+            log.info("Utilisateur trouvé : {}", userDTO);
         }
         return userDTO;
     }
 
+    /**
+     * Abonne un utilisateur à un thème.
+     *
+     * @param id      L'identifiant de l'utilisateur.
+     * @param themeId L'identifiant du thème.
+     * @return Le DTO de l'utilisateur mis à jour.
+     * @throws IllegalArgumentException Si l'utilisateur ou le thème n'existe pas,
+     *                                  ou si l'utilisateur est déjà abonné au
+     *                                  thème.
+     */
     public UserDTO subscribeUserToTheme(Long id, Long themeId) {
         Optional<User> user = userRepository.findById(id);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("Utilisateur non trouvé");
         }
         Theme theme = themeRepository.findById(themeId)
-                          .orElseThrow(() -> new IllegalArgumentException("Theme not found"));
-        boolean isSubscribed = user.get().getSubscribedThemes().contains(theme);
-        if (isSubscribed) {
-            throw new IllegalArgumentException("User already subscribed to this theme");
+                .orElseThrow(() -> new IllegalArgumentException("Thème non trouvé"));
+        if (user.get().getSubscribedThemes().contains(theme)) {
+            throw new IllegalArgumentException("Utilisateur déjà abonné à ce thème");
         }
-            
         user.get().getSubscribedThemes().add(theme);
         userRepository.save(user.get());
         return userMapper.toDto(user.get());
     }
 
+    /**
+     * Désabonne un utilisateur d'un thème.
+     *
+     * @param userId  L'identifiant de l'utilisateur.
+     * @param themeId L'identifiant du thème.
+     * @return Le DTO de l'utilisateur mis à jour.
+     * @throws IllegalArgumentException Si l'utilisateur ou le thème n'existe pas,
+     *                                  ou si l'utilisateur n'est pas abonné au
+     *                                  thème.
+     */
     public UserDTO unsubscribeUserFromTheme(long userId, Long themeId) {
         Optional<User> user = userRepository.findById(userId);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("Utilisateur non trouvé");
         }
-                        
         Theme theme = themeRepository.findById(themeId)
-                          .orElseThrow(() -> new IllegalArgumentException ("Theme not found"));
-        boolean isSubscribed = user.get().getSubscribedThemes().contains(theme);
-        if (!isSubscribed) {
-            throw new IllegalArgumentException("User not subscribed to this theme");
+                .orElseThrow(() -> new IllegalArgumentException("Thème non trouvé"));
+        if (!user.get().getSubscribedThemes().contains(theme)) {
+            throw new IllegalArgumentException("Utilisateur non abonné à ce thème");
         }
         user.get().getSubscribedThemes().remove(theme);
         userRepository.save(user.get());
         return userMapper.toDto(user.get());
     }
 
+    /**
+     * Met à jour les informations d'un utilisateur.
+     *
+     * @param userId L'identifiant de l'utilisateur.
+     * @param meDTO  Les nouvelles données de l'utilisateur.
+     * @return Les données mises à jour sous forme de DTO.
+     * @throws IllegalArgumentException Si le nom d'utilisateur ou l'email est déjà
+     *                                  utilisé.
+     */
     public MeDto updateUser(Long userId, MeDto meDTO) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-    
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
+
         boolean isUpdated = false;
-    
-        // check if the email is different and update if necessary
+
         if (!user.getEmail().equals(meDTO.getEmail())) {
-            // check if the email is already in use
             if (userRepository.existsByEmail(meDTO.getEmail())) {
-                throw new IllegalArgumentException("Error: Email is already in use!");
+                throw new IllegalArgumentException("Erreur : l'email est déjà utilisé !");
             }
             user.setEmail(meDTO.getEmail());
             isUpdated = true;
         }
-    
-        // check if the username is different and update if necessary
-        if (!user.getUsername().equals(meDTO.getUsername())) {
-            // check if the username is already in use
-            User existingUser = userRepository.findByUsername(meDTO.getUsername());
 
+        if (!user.getUsername().equals(meDTO.getUsername())) {
+            User existingUser = userRepository.findByUsername(meDTO.getUsername());
             if (existingUser != null && !user.getUsername().equals(meDTO.getUsername())) {
-                throw new IllegalArgumentException("Error: Username is already in use!");
+                throw new IllegalArgumentException("Erreur : le nom d'utilisateur est déjà utilisé !");
             }
             user.setUsername(meDTO.getUsername());
             isUpdated = true;
         }
-    
-        // Save the user if it has been updated
+
         if (isUpdated) {
             userRepository.save(user);
         }
+
         List<ThemeDTO> themeDTOs = new ArrayList<>();
         for (Theme theme : user.getSubscribedThemes()) {
-            themeDTOs.add(new ThemeDTO(theme.getId(), theme.getTitle(), theme.getDescription()));  // Adapté en fonction des attributs de ThemeDTO
+            themeDTOs.add(new ThemeDTO(theme.getId(), theme.getTitle(), theme.getDescription()));
         }
-        MeDto updatedMeDto = new MeDto(user.getId(),user.getUsername(),user.getEmail(), themeDTOs);
-        return updatedMeDto;
+        return new MeDto(user.getId(), user.getUsername(), user.getEmail(), themeDTOs);
     }
 }

@@ -9,17 +9,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MeDto {
 
-        private Long id;
-        private String username;
-        private String email;
-        private List<ThemeDTO> subscribedThemes;
-        public List<Long> getSubscribedThemeIds() {
+    private Long id;
+    private String username;
+    private String email;
+    private List<ThemeDTO> subscribedThemes;
+
+    public List<Long> getSubscribedThemeIds() {
         // Retourne une liste des IDs des thèmes abonnés
         List<Long> themeIds = new ArrayList<>();
         for (ThemeDTO theme : subscribedThemes) {
@@ -27,8 +27,5 @@ public class MeDto {
         }
         return themeIds;
     }
-    
 
-
-    }
-
+}

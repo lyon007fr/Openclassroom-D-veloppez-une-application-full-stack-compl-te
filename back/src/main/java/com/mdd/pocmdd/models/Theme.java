@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -20,12 +19,11 @@ public class Theme {
 
     @ManyToMany(mappedBy = "subscribedThemes")
     private List<User> subscribedUsers = new ArrayList<>();
-    
+
     @Column(nullable = false, length = 255)
     private String title;
 
     @Column(nullable = false, length = 255)
     private String description;
-
 
 }

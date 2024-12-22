@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './feature/auth/register/register.component'; // Import du composant RegisterComponent
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Nécessaire pour Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field'; // Pour mat-form-field et mat-label
 import { MatInputModule } from '@angular/material/input'; // Pour matInput
@@ -16,7 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'; // Impor
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ArticleListComponent } from './feature/articles/components/article-list/article-list.component';
 import { ArticleDetailComponent } from './feature/articles/components/article-detail/article-detail.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { LoginComponent } from './feature/auth/login/login.component';
@@ -27,7 +26,6 @@ import { ThemeComponent } from './feature/themes/theme/theme.component';
 import { MeComponent } from './feature/me/component/me/me.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
 
 @NgModule({
   declarations: [
@@ -41,8 +39,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     CreateArticleComponent,
     ThemeComponent,
     MeComponent,
-    NavbarComponent, 
-        
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +62,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, // Ajout de l'intercepteur JWT
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

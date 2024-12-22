@@ -12,34 +12,45 @@ import { ThemeComponent } from './feature/themes/theme/theme.component';
 import { MeComponent } from './feature/me/component/me/me.component';
 
 const routes: Routes = [
-   // Route pour la page d'inscription, protégée par UnGuard (seulement accessible si non connecté)
+  // Route pour la page d'inscription, protégée par UnGuard (seulement accessible si non connecté)
   { path: 'register', component: RegisterComponent, canActivate: [UnGuard] },
 
   // Route pour la page d'accueil, accessible à tous
   { path: 'home', component: HomeComponent },
 
   // Route pour la page de connexion, protégée par UnGuard (seulement accessible si non connecté)
-  {path: 'connexion', component: LoginComponent, canActivate: [UnGuard]},
+  { path: 'connexion', component: LoginComponent, canActivate: [UnGuard] },
 
   // Route pour led articles, protégée par AuthGuard (seulement accessible si connecté)
-  {path: 'articles', component: ArticleListComponent, canActivate: [AuthGuard]},
+  {
+    path: 'articles',
+    component: ArticleListComponent,
+    canActivate: [AuthGuard],
+  },
 
   // Route pour led articles, protégée par AuthGuard (seulement accessible si connecté)
-  { path: 'article/:id', component: ArticleDetailComponent, canActivate: [AuthGuard] },
+  {
+    path: 'article/:id',
+    component: ArticleDetailComponent,
+    canActivate: [AuthGuard],
+  },
 
   // Route pour led articles, protégée par AuthGuard (seulement accessible si connecté)
-  {path: 'article',component: CreateArticleComponent,canActivate: [AuthGuard]},
+  {
+    path: 'article',
+    component: CreateArticleComponent,
+    canActivate: [AuthGuard],
+  },
 
   // Route pour led articles, protégée par AuthGuard (seulement accessible si connecté)
-  {path: 'themes',component: ThemeComponent, canActivate: [AuthGuard]},
+  { path: 'themes', component: ThemeComponent, canActivate: [AuthGuard] },
 
   //Route pour la page de profil, protégée par AuthGuard (seulement accessible si connecté)
-  {path: 'me',component: MeComponent, canActivate: [AuthGuard]},
-  
+  { path: 'me', component: MeComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

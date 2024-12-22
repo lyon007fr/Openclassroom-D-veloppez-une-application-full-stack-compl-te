@@ -4,31 +4,40 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
-  display: flex ;
-  flex-direction: column ; /* Arrange les éléments verticalement */
-  justify-content: flex-start; /* Place les éléments au début de la colonne */
+  display: flex;
+  flex-direction: column;
+  /* Arrange les éléments verticalement */
+  justify-content: flex-start;
+  /* Place les éléments au début de la colonne */
 }
 
 .submit-btn {
   align-self: center !important;
-  margin-left: 40% ;
+  margin-left: 40%;
 }
 
 .arrow-container h1 {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-right: 10%; /* centre le titre pour être au milieu du form */
-  text-align: center; /* Centre le texte */
-  width: 100%; /* Occupe toute la largeur */
+  margin-right: 10%;
+  /* centre le titre pour être au milieu du form */
+  text-align: center;
+  /* Centre le texte */
+  width: 100%;
+  /* Occupe toute la largeur */
 }
 
 
 .back-button {
   display: flex;
-  align-items: center; /* Centre verticalement */
-  gap: 10px; /* Espace entre l'arrow et le titre */
-  width: 100%; /* Prend toute la largeur disponible */
-  justify-content: space-between; /* Sépare la flèche et le titre */
+  align-items: center;
+  /* Centre verticalement */
+  gap: 10px;
+  /* Espace entre l'arrow et le titre */
+  width: 100%;
+  /* Prend toute la largeur disponible */
+  justify-content: space-between;
+  /* Sépare la flèche et le titre */
 }
 
 
@@ -83,6 +92,7 @@ mat-form-field {
     padding: 15px;
     box-shadow: none;
   }
+
   .submit-btn {
     width: 80px;
     padding: 10px;
